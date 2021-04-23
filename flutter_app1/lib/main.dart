@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/TabBarScreen.dart';
 
@@ -5,6 +7,8 @@ import 'package:flutter_app1/TabBarScreen.dart';
 
 
 void main() {
+  HttpOverrides.global = new MyHttpOverrides();
+
   runApp(MyApp());
 }
 
@@ -106,5 +110,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

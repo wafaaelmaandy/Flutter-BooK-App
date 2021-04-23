@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   table_calendar: ^2.0.0
+  http: ^0.12.1
+
 
 
 
